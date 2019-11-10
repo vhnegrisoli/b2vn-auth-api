@@ -1,6 +1,21 @@
 # b2vn-auth-api
 Back-end de autenticação do projeto B2VN utilizando Java 11, Spring Boot, Spring Security, OAuth2.0, Spring Cloud OpenFeign, QueryDSL e PostgreSQL 11.
 
+# Dar build no projeto localmente
+
+mvn clean install
+
+# Rodando o projeto localmente
+
+Na raiz da aplicação: 
+
+mvn spring-boot:run
+
+ou
+
+cd /target
+java -jar b2vn-auth-api.jar
+
 # Criar rede b2vn overlay para aplicação
 docker network create -d overlay --driver=bridge b2vn
 
