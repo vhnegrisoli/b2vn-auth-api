@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.b2vn-auth-api</groupId>
-	<artifactId>b2vn-auth-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>b2vn-auth</artifactId>
+	<version>api</version>
 	<name>b2vn-auth-api</name>
 	<description>Projeto de usuários servindo como microsserviço de autenticação do projeto B2VN</description>
 
