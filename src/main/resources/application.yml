@@ -37,9 +37,9 @@ app-config:
 
   services:
     b2vn-auth-api:
-      url: http://localhost:8080
+      url: http://auth:8080
     b2vn-radar-api:
-      url: http://localhost:8081
+      url: http://radar:8081
 
 security:
   oauth2:
