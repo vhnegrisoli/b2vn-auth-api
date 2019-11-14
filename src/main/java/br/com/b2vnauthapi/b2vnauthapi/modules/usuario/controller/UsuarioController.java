@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
@@ -42,7 +44,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuario-autenticado")
-    public UsuarioAutenticado getUsuarioAutenticado() {
+    public UsuarioAutenticado getUsuarioAutenticado(HttpServletRequest request) {
         return usuarioService.getUsuarioAutenticadoAtualizaUltimaData();
     }
 }

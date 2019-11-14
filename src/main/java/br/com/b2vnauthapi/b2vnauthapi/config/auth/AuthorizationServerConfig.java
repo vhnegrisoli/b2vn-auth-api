@@ -16,8 +16,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import java.util.Collections;
-
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.ADMIN;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.USER;
 
@@ -34,16 +32,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private PasswordEncoder passwordEncoder;
     @Autowired
     private BCryptPasswordEncoder bcryptPasswordEncoder;
-    @Autowired
-    private CustomTokenEndpointAuthenticationFilter customTokenEndpointAuthenticationFilter;
 
     private static final String APPLICATION_CLIENT = "b2vn-auth-api-client";
     private static final String APPLICATION_SECRET = "b2vn-auth-api-secret";
     private static final Integer TOKEN_VALIDITY_SECONDS = 0;
     @Value("${app-config.oauth-clients.b2vn-radar-api.client}")
-    private String produtoApiClient;
+    private String radarApiClient;
     @Value("${app-config.oauth-clients.b2vn-radar-api.secret}")
-    private String produtoApiSecret;
+    private String radarApiSecret;
+    @Value("${app-config.oauth-clients.b2vn-acidentes-api.client}")
+    private String acidentesApiClient;
+    @Value("${app-config.oauth-clients.b2vn-acidentes-api.secret}")
+    private String acidentesApiSecret;
 
     @Bean
     public TokenStore tokenStore() {
@@ -58,8 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .passwordEncoder(passwordEncoder)
             .tokenKeyAccess("permitAll()")
             .checkTokenAccess("isAuthenticated()")
-            .allowFormAuthenticationForClients()
-            .tokenEndpointAuthenticationFilters(Collections.singletonList(customTokenEndpointAuthenticationFilter));
+            .allowFormAuthenticationForClients();
     }
 
     @Override
@@ -73,10 +72,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .scopes("read", "write", "trust")
 
             .and()
-            .withClient(produtoApiClient)
-            .secret(bcryptPasswordEncoder.encode(produtoApiSecret))
+            .withClient(radarApiClient)
+            .secret(bcryptPasswordEncoder.encode(radarApiSecret))
             .authorizedGrantTypes("client_credentials")
             .scopes("b2vn-radar-api")
+            .authorities(ADMIN.name(), USER.name())
+
+            .and()
+            .withClient(acidentesApiClient)
+            .secret(bcryptPasswordEncoder.encode(acidentesApiSecret))
+            .authorizedGrantTypes("client_credentials")
+            .scopes("b2vn-acidentes-api")
             .authorities(ADMIN.name(), USER.name())
 
             .resourceIds("oauth2-resource")
@@ -91,10 +97,5 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
             .tokenEnhancer(new CustomTokenEnhancer())
             .authenticationManager(authenticationManager);
-    }
-
-    @Bean
-    public CustomTokenEndpointAuthenticationFilter customFilter() {
-        return new CustomTokenEndpointAuthenticationFilter();
     }
 }
