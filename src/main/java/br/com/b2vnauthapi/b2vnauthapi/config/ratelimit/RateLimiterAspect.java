@@ -5,8 +5,6 @@ import com.google.common.util.concurrent.RateLimiter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +19,6 @@ public class RateLimiterAspect {
     public interface KeyFactory {
         String createKey(JoinPoint jp, RateLimit limit);
     }
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RateLimiterAspect.class);
 
     private static final KeyFactory DEFAULT_KEY_FACTORY = (jp, limit) -> JoinPointToStringHelper.toString(jp);
 

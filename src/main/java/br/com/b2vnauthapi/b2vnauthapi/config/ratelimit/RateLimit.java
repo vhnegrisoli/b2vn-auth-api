@@ -7,14 +7,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface RateLimit {
 
-    /**
-     * @return rate limit in queries per second
-     */
     int value();
-
-    /**
-     * @return rate limiter identifier (optional)
-     */
     String key() default "";
 
 }
