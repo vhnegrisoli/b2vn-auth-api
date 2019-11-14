@@ -1,5 +1,6 @@
 package br.com.b2vnauthapi.b2vnauthapi.modules.usuario.service;
 
+import br.com.b2vnauthapi.b2vnauthapi.config.ratelimit.RateLimit;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAutenticado;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioRequest;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario;
@@ -60,6 +61,7 @@ public class UsuarioService {
     }
 
     @Transactional
+    @RateLimit(1)
     public UsuarioAutenticado getUsuarioAutenticadoAtualizaUltimaData() {
         var usuarioAtualizado = usuarioRepository
             .findById(getUsuarioAutenticado().getId())

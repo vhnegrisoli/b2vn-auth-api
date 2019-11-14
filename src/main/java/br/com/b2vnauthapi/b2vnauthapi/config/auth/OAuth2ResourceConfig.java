@@ -29,6 +29,7 @@ public class OAuth2ResourceConfig extends ResourceServerConfigurerAdapter {
             "/oauth/token",
             "/oauth/authorize",
             "/api/usuarios/novo",
+            "/teste"
         };
 
         http
