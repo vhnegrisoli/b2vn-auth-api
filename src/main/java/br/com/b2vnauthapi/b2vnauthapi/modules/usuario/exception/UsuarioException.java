@@ -1,6 +1,6 @@
 package br.com.b2vnauthapi.b2vnauthapi.modules.usuario.exception;
 
-import br.com.b2vnauthapi.b2vnauthapi.exceptions.ValidacaoException;
+import br.com.b2vnauthapi.b2vnauthapi.exceptions.validacao.ValidacaoException;
 import lombok.Getter;
 
 public enum UsuarioException {
