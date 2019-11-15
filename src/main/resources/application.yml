@@ -1,16 +1,19 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    jdbc-url: jdbc:postgresql://ec2-174-129-253-63.compute-1.amazonaws.com:5432/dfc88rlf3uhvc0
-    username: ozuciictnesbcg
-    password: 134e055c5065b3d5a0df644ccd654c93c1513ecbf31eff721850af8d38e7fbab
-#    jdbc-url: jdbc:postgresql://localhost:5432/b2vn
-#    username: postgres
-#    password: 1y5h8j
+#    jdbc-url: jdbc:postgresql://ec2-174-129-253-63.compute-1.amazonaws.com:5432/dfc88rlf3uhvc0
+#    username: ozuciictnesbcg
+#    password: 134e055c5065b3d5a0df644ccd654c93c1513ecbf31eff721850af8d38e7fbab
+    jdbc-url: jdbc:postgresql://localhost:5432/b2vn
+    username: postgres
+    password: 1y5h8j
     initialization-mode: always
     initialize: true
     continue-on-error: true
     platform: postgresql
+
+  main:
+    allow-bean-definition-overriding: true
 
   jackson:
     time-zone: America/Sao_Paulo
