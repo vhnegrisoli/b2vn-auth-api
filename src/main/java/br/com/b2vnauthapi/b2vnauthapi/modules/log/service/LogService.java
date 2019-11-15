@@ -25,6 +25,10 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @SuppressWarnings("PMD.TooManyStaticImports")
 public class LogService {
 
+    private static final String SERVICO_NOME = "B2VN_AUTH_API";
+    private static final String SERVICO_DESCRICAO = "Api de Autenticação";
+    private static final String URL_SEM_LOG = "/api/log";
+
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
@@ -33,18 +37,23 @@ public class LogService {
     private LogRepositoryJdbcImpl logRepositoryJdbc;
 
     public void gerarLogUsuario(HttpServletRequest request) throws IOException {
-        var usuarioLogado = usuarioService.getUsuarioAutenticado();
-        processarLogDeUsuario(Log
-            .builder()
-            .dataAcesso(LocalDateTime.now())
-            .tipoOperacao(definirTipoAcesso(request.getMethod()))
-            .metodo(request.getMethod())
-            .urlAcessada(request.getRequestURI())
-            .usuarioId(usuarioLogado.getId())
-            .usuarioNome(usuarioLogado.getNome())
-            .usuarioEmail(usuarioLogado.getEmail())
-            .usuarioPermissao(usuarioLogado.getPermissao().getDescricao())
-            .build());
+        if (!URL_SEM_LOG.equals(request.getRequestURI())) {
+            var usuarioLogado = usuarioService.getUsuarioAutenticado();
+            processarLogDeUsuario(Log
+                .builder()
+                .dataAcesso(LocalDateTime.now())
+                .tipoOperacao(definirTipoAcesso(request.getMethod()))
+                .metodo(request.getMethod())
+                .urlAcessada(request.getRequestURI())
+                .usuarioId(usuarioLogado.getId())
+                .usuarioNome(usuarioLogado.getNome())
+                .usuarioEmail(usuarioLogado.getEmail())
+                .usuarioPermissao(usuarioLogado.getPermissao().getDescricao())
+                .usuarioDescricao(usuarioLogado.getDescricao())
+                .servicoNome(SERVICO_NOME)
+                .servicoDescricao(SERVICO_DESCRICAO)
+                .build());
+        }
     }
 
     private String definirTipoAcesso(String metodo) {

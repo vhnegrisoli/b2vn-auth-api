@@ -41,6 +41,14 @@ public class Log {
     @NotNull
     private String usuarioDescricao;
 
+    @Column(name = "servico_nome")
+    @NotNull
+    private String servicoNome;
+
+    @Column(name = "servico_descricao")
+    @NotNull
+    private String servicoDescricao;
+
     @Column(name = "url_acessada")
     @NotNull
     private String urlAcessada;
