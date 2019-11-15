@@ -5,17 +5,20 @@ import br.com.b2vnauthapi.b2vnauthapi.modules.log.repository.LogRepository;
 import br.com.b2vnauthapi.b2vnauthapi.modules.log.repository.LogRepositoryJdbcImpl;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
-import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.ALTERANDO;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.REMOVENDO;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
@@ -27,7 +30,7 @@ public class LogService {
 
     private static final String SERVICO_NOME = "B2VN_AUTH_API";
     private static final String SERVICO_DESCRICAO = "Api de Autenticação";
-    private static final String URL_SEM_LOG = "/api/log";
+    private static final List<String> URLS_SEM_LOG = List.of("/api/log", "/teste");
 
     @Autowired
     private UsuarioService usuarioService;
@@ -37,7 +40,7 @@ public class LogService {
     private LogRepositoryJdbcImpl logRepositoryJdbc;
 
     public void gerarLogUsuario(HttpServletRequest request) throws IOException {
-        if (!URL_SEM_LOG.equals(request.getRequestURI())) {
+        if (!URLS_SEM_LOG.contains(request.getRequestURI())) {
             var usuarioLogado = usuarioService.getUsuarioAutenticado();
             processarLogDeUsuario(Log
                 .builder()
@@ -76,5 +79,10 @@ public class LogService {
         if (!isEmpty(savedLog)) {
             logRepositoryJdbc.atualizaCamposDeDataEHora();
         }
+    }
+
+    public Page<Log> buscarTodosPaginados(Integer page, Integer size) {
+        var pageRequest = PageRequest.of(page, size);
+        return logRepository.findAll(pageRequest);
     }
 }
