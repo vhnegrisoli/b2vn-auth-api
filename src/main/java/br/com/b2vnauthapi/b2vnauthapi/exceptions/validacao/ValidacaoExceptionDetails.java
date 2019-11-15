@@ -1,4 +1,4 @@
-package br.com.b2vnauthapi.b2vnauthapi.exceptions;
+package br.com.b2vnauthapi.b2vnauthapi.exceptions.validacao;
 
 import lombok.Data;
 
