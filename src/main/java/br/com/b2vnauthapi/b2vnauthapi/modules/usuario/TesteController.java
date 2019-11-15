@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/teste")
 public class TesteController {
 
-    private static final Integer RATE_LIMIT = 3;
-
     @GetMapping
-    @RateLimit(RATE_LIMIT)
+    @RateLimit(3)
     public String teste() {
         return "teste";
     }
