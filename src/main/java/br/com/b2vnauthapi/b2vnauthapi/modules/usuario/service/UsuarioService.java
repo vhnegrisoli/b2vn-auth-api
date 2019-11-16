@@ -1,12 +1,17 @@
 package br.com.b2vnauthapi.b2vnauthapi.modules.usuario.service;
 
 import br.com.b2vnauthapi.b2vnauthapi.config.ratelimit.RateLimit;
+import br.com.b2vnauthapi.b2vnauthapi.exceptions.validacao.ValidacaoException;
+import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAdminRequest;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAutenticado;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioRequest;
+import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Permissao;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.repository.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,8 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.ADMIN;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.exception.UsuarioException.*;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario.of;
 
@@ -90,12 +95,24 @@ public class UsuarioService {
             .of(usuarioRepository.findByEmail(email).orElseThrow(USUARIO_NAO_ENCONTRADO::getException));
     }
 
-    public List<Usuario> getUsuarios() {
+    public Page<Usuario> getUsuarios(Integer page, Integer size) {
+        var pageRequest = PageRequest.of(page, size);
         var usuarioAutenticado = getUsuarioAutenticado();
         if (usuarioAutenticado.isAdmin()) {
-            return usuarioRepository.findAll();
+            return usuarioRepository.findAll(pageRequest);
         }
-        return List.of(usuarioRepository.findById(usuarioAutenticado.getId())
-            .orElseThrow(USUARIO_NAO_ENCONTRADO::getException));
+        return usuarioRepository.findById(usuarioAutenticado.getId(), pageRequest);
+    }
+
+    @Transactional
+    public void tornarAdmin(UsuarioAdminRequest request) {
+        var usuario = usuarioRepository.findByCpf(request.getCpf())
+            .orElseThrow(USUARIO_NAO_ENCONTRADO::getException);
+        if (usuario.getPermissao().getCodigo().equals(ADMIN)) {
+            usuario.setPermissao(new Permissao(1, ADMIN, "Administrador"));
+            usuarioRepository.save(usuario);
+        } else {
+            throw new ValidacaoException("Esse usuário já é um administrador");
+        }
     }
 }

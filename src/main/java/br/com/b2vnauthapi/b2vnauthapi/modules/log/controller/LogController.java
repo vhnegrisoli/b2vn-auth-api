@@ -22,7 +22,7 @@ public class LogController {
 
     @GetMapping("/todos/paginacao")
     public Page<Log> buscarTodosPaginados(@PathParam("page") Integer page,
-                                                  @PathParam("size") Integer size) {
+                                          @PathParam("size") Integer size) {
         return logService.buscarTodosPaginados(page, size);
     }
 }

@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.ALTERANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
-import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.REMOVENDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.ALTERANDO;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.REMOVENDO;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
@@ -30,7 +30,7 @@ public class LogService {
 
     private static final String SERVICO_NOME = "B2VN_AUTH_API";
     private static final String SERVICO_DESCRICAO = "Api de Autenticação";
-    private static final List<String> URLS_SEM_LOG = List.of("/api/log", "/teste");
+    private static final List<String> URLS_SEM_LOG = List.of("/api/log", "/teste", "/api/usuarios/novo");
 
     @Autowired
     private UsuarioService usuarioService;
@@ -40,7 +40,7 @@ public class LogService {
     private LogRepositoryJdbcImpl logRepositoryJdbc;
 
     public void gerarLogUsuario(HttpServletRequest request) throws IOException {
-        if (!URLS_SEM_LOG.contains(request.getRequestURI())) {
+        if (!URLS_SEM_LOG.contains(request.getRequestURI()) && !hasSwaggerUrl(request.getRequestURI())) {
             var usuarioLogado = usuarioService.getUsuarioAutenticado();
             processarLogDeUsuario(Log
                 .builder()
@@ -57,6 +57,10 @@ public class LogService {
                 .servicoDescricao(SERVICO_DESCRICAO)
                 .build());
         }
+    }
+
+    private boolean hasSwaggerUrl(String url) {
+        return url.contains("swagger") || url.contains("error");
     }
 
     private String definirTipoAcesso(String metodo) {
@@ -83,6 +87,6 @@ public class LogService {
 
     public Page<Log> buscarTodosPaginados(Integer page, Integer size) {
         var pageRequest = PageRequest.of(page, size);
-        return logRepository.findAll(pageRequest);
+        return logRepository.findByMetodo("GET", pageRequest);
     }
 }
