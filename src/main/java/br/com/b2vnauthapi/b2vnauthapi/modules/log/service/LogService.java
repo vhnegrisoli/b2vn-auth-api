@@ -30,7 +30,8 @@ public class LogService {
 
     private static final String SERVICO_NOME = "B2VN_AUTH_API";
     private static final String SERVICO_DESCRICAO = "Api de Autenticação";
-    private static final List<String> URLS_SEM_LOG = List.of("/api/log", "/teste", "/api/usuarios/novo");
+    private static final List<String> URLS_SEM_LOG = List.of("/api/log", "/teste", "/api/usuarios/novo",
+        "/api/usuarios/usuario-autenticado");
 
     @Autowired
     private UsuarioService usuarioService;

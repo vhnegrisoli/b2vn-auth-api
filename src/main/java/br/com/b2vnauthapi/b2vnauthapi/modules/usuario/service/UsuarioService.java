@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.ADMIN;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.exception.UsuarioException.*;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario.of;
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 @Slf4j
@@ -92,7 +93,18 @@ public class UsuarioService {
             throw USUARIO_SEM_SESSAO.getException();
         }
         return UsuarioAutenticado
-            .of(usuarioRepository.findByEmail(email).orElseThrow(USUARIO_NAO_ENCONTRADO::getException));
+            .of(usuarioRepository.findByEmail(getUserEmail(email, principal))
+                .orElseThrow(USUARIO_NAO_ENCONTRADO::getException));
+    }
+
+    private String getUserEmail(String email, Object principal) {
+        if (!isEmpty(email) && email.contains("@")) {
+            return email;
+        }
+        if (!isEmpty(principal) && principal.toString().contains("@")) {
+            return principal.toString();
+        }
+        throw new ValidacaoException("Email não identificado.");
     }
 
     public Page<Usuario> getUsuarios(Integer page, Integer size) {

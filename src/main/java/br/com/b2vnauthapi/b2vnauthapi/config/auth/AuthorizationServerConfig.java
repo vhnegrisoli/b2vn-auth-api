@@ -69,7 +69,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .secret(bcryptPasswordEncoder.encode(APPLICATION_SECRET))
             .authorizedGrantTypes("password")
             .authorities(ADMIN.name(), USER.name())
-            .scopes("read", "write", "trust")
+            .scopes("b2vn-auth-api")
 
             .and()
             .withClient(radarApiClient)
