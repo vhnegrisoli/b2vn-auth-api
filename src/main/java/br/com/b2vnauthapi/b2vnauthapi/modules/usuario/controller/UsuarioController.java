@@ -1,8 +1,10 @@
 package br.com.b2vnauthapi.b2vnauthapi.modules.usuario.controller;
 
+import br.com.b2vnauthapi.b2vnauthapi.modules.log.service.LogService;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAdminRequest;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAutenticado;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioRequest;
+import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioResponse;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -22,11 +26,20 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private LogService logService;
 
     @GetMapping
+    public List<UsuarioResponse> getUsuarios(HttpServletRequest request) throws IOException {
+        var usuarios = usuarioService.getUsuarios();
+        logService.gerarLogUsuario(request);
+        return usuarios;
+    }
+
+    @GetMapping("/page")
     public Page<Usuario> getUsuarios(@PathParam("page") Integer page,
                                      @PathParam("size") Integer size) {
-        return usuarioService.getUsuarios(page, size);
+        return usuarioService.getUsuariosPaginado(page, size);
     }
 
     @GetMapping("/check-session")
@@ -47,12 +60,14 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuario-autenticado")
-    public UsuarioAutenticado getUsuarioAutenticado(HttpServletRequest request) {
+    public UsuarioAutenticado getUsuarioAutenticado(HttpServletRequest request) throws IOException {
         return usuarioService.getUsuarioAutenticadoAtualizaUltimaData();
     }
 
     @PostMapping("/admin/novo")
-    public void tornarAdmin(@RequestBody UsuarioAdminRequest usuarioAdminRequest) {
-
+    @ResponseStatus(value = HttpStatus.OK, reason = "O usuário tornou-se um administrador!")
+    public void tornarAdmin(@RequestBody UsuarioAdminRequest usuarioAdminRequest, HttpServletRequest request)
+        throws IOException {
+        usuarioService.tornarAdmin(usuarioAdminRequest);
     }
 }

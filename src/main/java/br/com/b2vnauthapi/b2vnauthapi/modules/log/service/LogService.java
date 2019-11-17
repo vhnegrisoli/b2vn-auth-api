@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
@@ -30,8 +29,6 @@ public class LogService {
 
     private static final String SERVICO_NOME = "B2VN_AUTH_API";
     private static final String SERVICO_DESCRICAO = "Api de Autenticação";
-    private static final List<String> URLS_SEM_LOG = List.of("/api/log", "/teste", "/api/usuarios/novo",
-        "/api/usuarios/usuario-autenticado");
 
     @Autowired
     private UsuarioService usuarioService;
@@ -41,7 +38,7 @@ public class LogService {
     private LogRepositoryJdbcImpl logRepositoryJdbc;
 
     public void gerarLogUsuario(HttpServletRequest request) throws IOException {
-        if (!URLS_SEM_LOG.contains(request.getRequestURI()) && !hasSwaggerUrl(request.getRequestURI())) {
+        if (isAuthenticated(request)) {
             var usuarioLogado = usuarioService.getUsuarioAutenticado();
             processarLogDeUsuario(Log
                 .builder()
@@ -52,7 +49,7 @@ public class LogService {
                 .usuarioId(usuarioLogado.getId())
                 .usuarioNome(usuarioLogado.getNome())
                 .usuarioEmail(usuarioLogado.getEmail())
-                .usuarioPermissao(usuarioLogado.getPermissao().getDescricao())
+                .usuarioPermissao(usuarioLogado.getPermissao().name())
                 .usuarioDescricao(usuarioLogado.getDescricao())
                 .servicoNome(SERVICO_NOME)
                 .servicoDescricao(SERVICO_DESCRICAO)
@@ -60,8 +57,8 @@ public class LogService {
         }
     }
 
-    private boolean hasSwaggerUrl(String url) {
-        return url.contains("swagger") || url.contains("error");
+    private boolean isAuthenticated(HttpServletRequest request) {
+        return !isEmpty(request.getUserPrincipal());
     }
 
     private String definirTipoAcesso(String metodo) {
@@ -86,8 +83,8 @@ public class LogService {
         }
     }
 
-    public Page<Log> buscarTodosPaginados(Integer page, Integer size) {
+    public Page<Log> buscarTodosPaginados(String metodo, Integer page, Integer size) {
         var pageRequest = PageRequest.of(page, size);
-        return logRepository.findByMetodo("GET", pageRequest);
+        return logRepository.findByMetodo(metodo, pageRequest);
     }
 }

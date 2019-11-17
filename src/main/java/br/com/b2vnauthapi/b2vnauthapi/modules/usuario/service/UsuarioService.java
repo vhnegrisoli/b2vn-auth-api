@@ -5,6 +5,7 @@ import br.com.b2vnauthapi.b2vnauthapi.exceptions.validacao.ValidacaoException;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAdminRequest;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioAutenticado;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioRequest;
+import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.dto.UsuarioResponse;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Permissao;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.repository.UsuarioRepository;
@@ -19,14 +20,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.ADMIN;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.USER;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.exception.UsuarioException.*;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.model.Usuario.of;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 @Slf4j
+@SuppressWarnings("PMD.TooManyStaticImports")
 public class UsuarioService {
 
     @Autowired
@@ -107,7 +112,20 @@ public class UsuarioService {
         throw new ValidacaoException("Email não identificado.");
     }
 
-    public Page<Usuario> getUsuarios(Integer page, Integer size) {
+    public List<UsuarioResponse> getUsuarios() {
+        var usuarioAutenticado = getUsuarioAutenticado();
+        if (usuarioAutenticado.isAdmin()) {
+            return usuarioRepository
+                .findAll()
+                .stream()
+                .map(UsuarioResponse::of)
+                .collect(Collectors.toList());
+        }
+        return List.of(UsuarioResponse.of(usuarioRepository.findById(usuarioAutenticado.getId())
+            .orElseThrow(USUARIO_NAO_ENCONTRADO::getException)));
+    }
+
+    public Page<Usuario> getUsuariosPaginado(Integer page, Integer size) {
         var pageRequest = PageRequest.of(page, size);
         var usuarioAutenticado = getUsuarioAutenticado();
         if (usuarioAutenticado.isAdmin()) {
@@ -120,7 +138,7 @@ public class UsuarioService {
     public void tornarAdmin(UsuarioAdminRequest request) {
         var usuario = usuarioRepository.findByCpf(request.getCpf())
             .orElseThrow(USUARIO_NAO_ENCONTRADO::getException);
-        if (usuario.getPermissao().getCodigo().equals(ADMIN)) {
+        if (usuario.getPermissao().getCodigo().equals(USER)) {
             usuario.setPermissao(new Permissao(1, ADMIN, "Administrador"));
             usuarioRepository.save(usuario);
         } else {

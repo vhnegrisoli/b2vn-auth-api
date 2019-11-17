@@ -20,9 +20,10 @@ public class LogController {
         logService.processarLogDeUsuario(log);
     }
 
-    @GetMapping("/todos/paginacao")
-    public Page<Log> buscarTodosPaginados(@PathParam("page") Integer page,
-                                          @PathParam("size") Integer size) {
-        return logService.buscarTodosPaginados(page, size);
+    @GetMapping("metodo/{metodo}/todos/paginacao")
+    public Page<Log> buscarTodosPaginadosPorMetodo(@PathVariable String metodo,
+                                                   @PathParam("page") Integer page,
+                                                   @PathParam("size") Integer size) {
+        return logService.buscarTodosPaginados(metodo, page, size);
     }
 }
