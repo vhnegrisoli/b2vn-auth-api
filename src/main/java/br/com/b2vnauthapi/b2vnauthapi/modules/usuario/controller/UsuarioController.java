@@ -19,6 +19,9 @@ import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/usuarios")
@@ -29,42 +32,42 @@ public class UsuarioController {
     @Autowired
     private LogService logService;
 
-    @GetMapping
+    @GetMapping(produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public List<UsuarioResponse> getUsuarios(HttpServletRequest request) throws IOException {
         var usuarios = usuarioService.getUsuarios();
         logService.gerarLogUsuario(request);
         return usuarios;
     }
 
-    @GetMapping("/page")
+    @GetMapping(value = "/page", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public Page<Usuario> getUsuarios(@PathParam("page") Integer page,
                                      @PathParam("size") Integer size) {
         return usuarioService.getUsuariosPaginado(page, size);
     }
 
-    @GetMapping("/check-session")
+    @GetMapping(value = "/check-session", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public ResponseEntity checkSession() {
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @PostMapping("/novo")
+    @PostMapping(value = "/novo", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     @ResponseStatus(code = HttpStatus.CREATED, reason = "Usuário inserido com sucesso!")
     public void novoUsuario(@RequestBody @Valid UsuarioRequest usuarioRequest) {
         usuarioService.save(usuarioRequest);
     }
 
-    @PutMapping("/alterar-acesso")
+    @PutMapping(value = "/alterar-acesso", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     @ResponseStatus(code = HttpStatus.OK, reason = "Usuário alterado com sucesso!")
     public void alterarDadosUsuario(@RequestBody @Valid UsuarioRequest usuarioRequest) {
         usuarioService.save(usuarioRequest);
     }
 
-    @GetMapping("/usuario-autenticado")
+    @GetMapping(value = "/usuario-autenticado", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public UsuarioAutenticado getUsuarioAutenticado(HttpServletRequest request) throws IOException {
         return usuarioService.getUsuarioAutenticadoAtualizaUltimaData();
     }
 
-    @PostMapping("/admin/novo")
+    @PostMapping(value = "/admin/novo", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     @ResponseStatus(value = HttpStatus.OK, reason = "O usuário tornou-se um administrador!")
     public void tornarAdmin(@RequestBody UsuarioAdminRequest usuarioAdminRequest, HttpServletRequest request)
         throws IOException {

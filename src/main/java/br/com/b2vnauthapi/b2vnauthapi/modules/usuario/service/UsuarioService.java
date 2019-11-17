@@ -34,6 +34,8 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @SuppressWarnings("PMD.TooManyStaticImports")
 public class UsuarioService {
 
+    private static final Integer RATE_LIMIT = 5;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -72,7 +74,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    @RateLimit(1)
+    @RateLimit(5)
     public UsuarioAutenticado getUsuarioAutenticadoAtualizaUltimaData() {
         var usuarioAtualizado = usuarioRepository
             .findById(getUsuarioAutenticado().getId())
@@ -100,6 +102,11 @@ public class UsuarioService {
         return UsuarioAutenticado
             .of(usuarioRepository.findByEmail(getUserEmail(email, principal))
                 .orElseThrow(USUARIO_NAO_ENCONTRADO::getException));
+    }
+
+    public Usuario buscarUm(Integer id) {
+        return usuarioRepository.findById(id)
+            .orElseThrow(USUARIO_NAO_ENCONTRADO::getException);
     }
 
     private String getUserEmail(String email, Object principal) {
@@ -139,7 +146,7 @@ public class UsuarioService {
         var usuario = usuarioRepository.findByCpf(request.getCpf())
             .orElseThrow(USUARIO_NAO_ENCONTRADO::getException);
         if (usuario.getPermissao().getCodigo().equals(USER)) {
-            usuario.setPermissao(new Permissao(1, ADMIN, "Administrador"));
+            usuario.setPermissao(new Permissao(1, ADMIN, "Administrador", RATE_LIMIT));
             usuarioRepository.save(usuario);
         } else {
             throw new ValidacaoException("Esse usuário já é um administrador");

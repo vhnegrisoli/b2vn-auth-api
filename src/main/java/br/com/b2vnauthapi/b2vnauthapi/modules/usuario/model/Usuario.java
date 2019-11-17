@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.USER;
@@ -20,6 +21,7 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @Table(name = "USUARIO")
 @Data
 @AllArgsConstructor
+@XmlRootElement
 @NoArgsConstructor
 @Builder
 public class Usuario {
@@ -67,7 +69,7 @@ public class Usuario {
         BeanUtils.copyProperties(usuarioRequest, usuario);
         usuario.setDataCadastro(LocalDateTime.now());
         usuario.setUltimoAcesso(LocalDateTime.now());
-        usuario.setPermissao(new Permissao(2, USER, "Usuário"));
+        usuario.setPermissao(new Permissao(2, USER, "Usuário", 2));
         return usuario;
     }
 }

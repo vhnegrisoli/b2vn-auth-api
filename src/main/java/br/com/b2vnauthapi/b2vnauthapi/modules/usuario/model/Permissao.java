@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Table(name = "PERMISSAO")
+@XmlRootElement
 public class Permissao {
 
     @Id
@@ -29,4 +31,8 @@ public class Permissao {
     @Column(name = "DESCRICAO")
     @NotNull
     private String descricao;
+
+    @Column(name = "RATE_LIMIT")
+    @NotNull
+    private Integer rateLimit;
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 
 import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.ADMIN;
@@ -18,6 +19,7 @@ import static br.com.b2vnauthapi.b2vnauthapi.modules.usuario.enums.EPermissao.US
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@XmlRootElement
 public class UsuarioAutenticado {
 
     private Integer id;
