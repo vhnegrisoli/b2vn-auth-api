@@ -58,14 +58,14 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
 
 
 ### Funcionalidades
-Paginação nas consultas para melhoras a eficiência  
-Token de segurança (Oauth2)
-Log para controle de acesso dos usuários
-Sistema [RBAC](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview) (Usuários, administradores, configurações de acesso, permissões)
-Rate Limiting baseado no RBAC
-API baseada em microsserviços: Autenticação, Radares, Trajetos e Controles
-Saídas em JSON, XML
-Exportação para CSV
+    Paginação nas consultas para melhoras a eficiência  
+    Token de segurança (Oauth2)
+    Log para controle de acesso dos usuários
+    Sistema [RBAC](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview) (Usuários, administradores, configurações de acesso, permissões)
+    Rate Limiting baseado no RBAC
+    API baseada em microsserviços: Autenticação, Radares, Trajetos e Controles
+    Saídas em JSON, XML
+    Exportação para CSV
 
 
 ## Arquitetura
