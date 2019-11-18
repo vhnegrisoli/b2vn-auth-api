@@ -25,6 +25,8 @@ Nessa seção é possível visualizar algumas interfaces e algumas funcionalidad
 
 #### Tela do mapa de radares separados por cores
 
+Ao clicar sobre um radar, aparecerá um popup indicando os parâmetros do mesmo.
+
 ![mapa](/imagens/mapa.jpeg)
 
 #### Tela consulta das localizações
@@ -138,6 +140,14 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
 A arquitetura utilizada é a [REST](http://www.matera.com/blog/post/quais-os-beneficios-da-arquitetura-rest), um protocolo utilizado na integração de Web Services, e estes, são soluções utilizadas para integração e comunicação entre sistemas. Como uma abstração da arquitetura HTTP
 
 ![RESTful example](http://www.matera.com/br/wp-content/uploads/2018/06/RESTful-Service-Client-Example-Crunchify-Tutorial.png)
+
+### Microsserviços
+
+[Microsserviços](https://www.redhat.com/pt-br/topics/microservices/what-are-microservices) são uma abordagem de arquitetura para a criação de aplicações. O que diferencia a arquitetura de microsserviços das abordagens monolíticas tradicionais é como ela decompõe a aplicação por funções básicas. Cada função é denominada um serviço e pode ser criada e implantada de maneira independente. Isso significa que cada serviço individual pode funcionar ou falhar sem comprometer os demais.
+
+![microservices](https://www.redhat.com/cms/managed-files/monolithic-vs-microservices.png)
+
+Portanto, um microsserviço é uma função essencial de uma aplicação e é executado independentemente dos outros serviços. Nós escolhemos sua utilização pois torna o projeto mais seguro e eficaz na questão da escalabilidade do mesmo.
 
 
 ## Documentos da API
