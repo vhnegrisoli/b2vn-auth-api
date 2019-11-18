@@ -58,7 +58,7 @@ Ao clicar sobre um radar, aparecerá um popup indicando os parâmetros do mesmo.
 
 Nessa tela é possível ver todos os usuários e também conceder a permissão de administrador pelo CPF.
 
-![usuarios](/imagens/usuarios.jpeg)
+![usuarios_list](/imagens/usuarios_list.jpeg)
 
 ### Telas (swagger)
 
