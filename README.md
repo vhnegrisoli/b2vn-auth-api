@@ -13,7 +13,6 @@ Você poderá executar o seguinte comando após o procedimento de instalação a
     $ java -version
     java version "11.0.5"
 
-
 ## Instalação - Local
 
     $ git clone https://github.com/vhnegrisoli/b2vn-auth-api.git
@@ -62,10 +61,12 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
  - Token de segurança (Oauth2)
  - Log para controle de acesso dos usuários
  - Sistema [RBAC](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview) (Usuários, administradores, configurações de acesso, permissões)
- - Rate Limiting configuravel e baseado no RBAC
+ - Rate Limiting configurável e baseado no RBAC
  - API baseada em microsserviços: Autenticação, Radares, Trajetos e Controles
  - Saídas em JSON, XML
  - Exportação para CSV
+ - Visualização dos radares por lote no Mapa
+ - Visualização das consultas em formato de tabelas paginadas
 
 
 ## Arquitetura
