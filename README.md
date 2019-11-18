@@ -6,6 +6,7 @@ Back-end de autenticação do projeto B2VN utilizando Java 11, Spring Boot, Spri
 ### Telas (site)
 
 Nessa seção é possível visualizar algumas interfaces e algumas funcionalidades já implementadas no site (front-end).
+Na API é possível executar serviços de comparações, com visualização gráfica, e outras relações.
 
 #### Tela de Login
 
@@ -208,6 +209,11 @@ O [JMeter](https://jmeter.apache.org/download_jmeter.cgi) é uma ferramenta dese
 - [react-table](https://www.npmjs.com/package/react-table) para a visualizações dos dados nas tabelas.
 - [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2) utilizado para gerar gráficos dinâmicos.
 
+### Autores
+
+- [Rafael Nonino Filho](https://www.linkedin.com/in/rafael-nonino-filho-17977b15b) - Desenvolvedor Front-end
+- [Victor Hugo Negrisoli](https://www.linkedin.com/in/victorhugonegrisoli) - Desenvolvedor Back-end
+ 
 
 ### Licensa de uso
 
