@@ -3,16 +3,71 @@ Back-end de autenticação do projeto B2VN utilizando Java 11, Spring Boot, Spri
 
 ## Apresentação
 
-### Telas (Site)
+### Telas (site)
+
+Nessa seção é possível visualizar algumas interfaces e algumas funcionalidades já implementadas no site (front-end).
 
 #### Tela de Login
 
-![Tela de Login](/imagens/login.jpeg)
+![login](/imagens/login.jpeg)
+
+#### Tela de Cadastro
+
+![cadastro](/imagens/cadastro.jpeg)
+
+#### Tela Inicial
+
+![home](/imagens/home.jpeg)
+
+#### Tela do passo a passso para conseguir um Token (Oauth2)
+
+![token](/imagens/token.jpeg)
+
+#### Tela do mapa de radares separados por cores
+
+![mapa](/imagens/mapa.jpeg)
+
+#### Tela consulta das localizações
+
+![localizacoes](/imagens/localizacoes.jpeg)
+
+#### Tela consulta da acurácia dos radares
+
+![acuracia](/imagens/acuracia.jpeg)
+
+#### Tela consulta das velocidades médias
+
+![velocidade_media](/imagens/velocidade_media.jpeg)
+
+#### Tela consulta da distância entre radares
+
+![distancia_radares](/imagens/distancia_radares.jpeg)
+
+#### Tela para exportação de CSV e PDF
+
+![exportacao](/imagens/exportacao.jpeg)
+
+#### Tela para visualização dos usuários do sistema e suas permissões
+
+Nessa tela é possível ver todos os usuários e também conceder a permissão de administrador pelo CPF.
+
+![usuarios](/imagens/usuarios.jpeg)
+
+### Telas (swagger)
+
+Nessa seção é possível visualizar algumas URLs desenvovildas do sistema e mostrar, seu retorno e suas exeções.
+
+#### Tela para visualização dos métodos da API de radares
+
+![api_radares](/imagens/api_radares.jpeg)
+
+#### Tela para visualização dos métodos da API de radares
+
+![api_radares_2](/imagens/api_radares_2.jpeg)
 
 ## Exigências
 
 Para o desenvolvimento, você precisará apenas do JAVA instalado em seu ambiente de trabalho.
-
 
 ### Java
 
@@ -112,7 +167,11 @@ http://localhost:8081/swagger-ui.html
 
 O [JMeter](https://jmeter.apache.org/download_jmeter.cgi) é uma ferramenta desenvolvida totalmente em Java pelo grupo Apache com o objetivo de realizar testes de carga e stress, a seguir faço um roteiro para realização de um teste de stress simples.
 
-A versão do JMeter utilizada é a 5.2
+1- Primeiramente devemos baixar o JMeter 5.2, para isso [clique aqui](https://jmeter.apache.org/download_jmeter.cgi).
+
+2- Descompactar o conteúdo do arquivo em uma pasta de sua preferência.
+
+3- Inicie a ferramenta executando o jar $pastajmeter/bin/ApacheJMeter.jar.
 
 ![Stress Test - B2VN](https://i.ibb.co/hWwYtWx/stress-test.jpg)
 
@@ -143,4 +202,4 @@ A versão do JMeter utilizada é a 5.2
 ### Licensa de uso
 
 Este projeto está licenciado sob a licença MIT(Instituto de Tecnologia de Massachusetts).
-Mais informações consulte a ![LICENSE](LICENSE)
+Para mais informações consulte nossa ![LICENSE](licença aqui)
