@@ -14,7 +14,7 @@ Você poderá executar o seguinte comando após o procedimento de instalação a
     java version "11.0.5"
 
 
-## Instalação
+## Instalação - Local
 
     $ git clone https://github.com/vhnegrisoli/b2vn-auth-api.git
     $ cd b2vn-auth-api
@@ -35,17 +35,28 @@ ou
     $ java -jar b2vn-auth-api.jar
     
 
-### Criar rede b2vn overlay para aplicação
-    $ docker network create -d overlay --driver=bridge b2vn
+## Instalação - Docker
 
-### Build do projeto de autenticação B2VN Auth
-    $ docker build -t b2vn-auth-api .
+Para começar, como são microsserviços, é necessário ter todos os projetos.
 
-### Rodar o projeto B2VN Auth
-    $ docker run --net=b2vn -p 8080:8080 -t b2vn-auth-api   
+    $ git clone https://github.com/vhnegrisoli/b2vn-auth-api.git
+    $ git clone https://github.com/vhnegrisoli/b2vn-radar-api.git
+    $ git clone https://github.com/Noninus/b2vn-front.git
 
-### Documentação da API com o Swagger
-http://localhost:8080/swagger-ui.html
+###  Criar network b2vn
+    $ docker network create b2vn
+
+### Build dos projetos
+    $ docker image build -t b2vn-auth-api .
+    $ docker image build -t b2vn-radar-api .
+    $ docker image build -t b2vn-front .
+
+### Criar o container com o parametro --name para especificar o network
+    $ docker container run --network b2vn --name auth -p 8080:8080 -d b2vn-auth-api
+    $ docker container run --network b2vn --name radar -p 8081:8081 -d b2vn-radar-api
+    $ docker container run --network b2vn --name front -p 3000:80 b2vn-front
+
+
 
 ## Arquitetura
 
@@ -56,14 +67,20 @@ A arquitetura utilizada é a [REST](http://www.matera.com/blog/post/quais-os-ben
 
 ## Documentos da API
 
+### Diagrama de caso de uso
+
 O [Diagrama de Caso de Uso](https://medium.com/operacionalti/uml-diagrama-de-casos-de-uso-29f4358ce4d5) descreve as funcionalidades propostas pelo PhiloPDV e é uma excelente ferramenta para o levantamento dos requisitos funcionais do sistema.interações com elementos externos e entre si.
 
 ![Caso de Uso - B2VN](https://uploaddeimagens.com.br/images/002/513/934/full/caso-uso.jpeg?1574080556)
 
+### Diagrama de implantação
 
-O [Diagrama de Implementação](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-implementacao-uml) descreve a implementação física de informações geradas pelo programa de software em componentes de hardware.
+O [Diagrama de Implantação](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-implementacao-uml) descreve a implementação física de informações geradas pelo programa de software em componentes de hardware.
 
 ![Implantação - B2VN](https://i.ibb.co/JByjgDR/Diagrama-de-Implanta-o.png)
+
+### Documentação da API com o Swagger
+http://localhost:8080/swagger-ui.html
 
 
 ## Linguagens & ferramentas
