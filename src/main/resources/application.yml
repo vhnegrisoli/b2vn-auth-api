@@ -4,9 +4,12 @@ spring:
 #    jdbc-url: jdbc:postgresql://ec2-174-129-253-63.compute-1.amazonaws.com:5432/dfc88rlf3uhvc0
 #    username: ozuciictnesbcg
 #    password: 134e055c5065b3d5a0df644ccd654c93c1513ecbf31eff721850af8d38e7fbab
-    jdbc-url: jdbc:postgresql://localhost:5432/b2vn
+#    jdbc-url: jdbc:postgresql://localhost:5432/b2vn
+#    username: postgres
+#    password: 1y5h8j
+    jdbc-url: jdbc:postgresql://b2vn-db:5432/postgres
     username: postgres
-    password: 1y5h8j
+    password: b2vn-auth
     initialization-mode: always
     initialize: true
     continue-on-error: true
@@ -45,12 +48,12 @@ app-config:
 
   services:
     b2vn-auth-api:
-#      url: http://auth:8080
-      url: http://localhost:8080
+      url: http://auth:8080
+#      url: http://localhost:8080
 
     b2vn-radar-api:
-#      url: http://radar:8081
-      url: http://localhost:8081
+      url: http://radar:8081
+#      url: http://localhost:8081
 
 security:
   oauth2:
