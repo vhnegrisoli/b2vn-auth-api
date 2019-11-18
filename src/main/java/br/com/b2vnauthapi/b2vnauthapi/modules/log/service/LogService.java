@@ -2,7 +2,6 @@ package br.com.b2vnauthapi.b2vnauthapi.modules.log.service;
 
 import br.com.b2vnauthapi.b2vnauthapi.modules.log.model.Log;
 import br.com.b2vnauthapi.b2vnauthapi.modules.log.repository.LogRepository;
-import br.com.b2vnauthapi.b2vnauthapi.modules.log.repository.LogRepositoryJdbcImpl;
 import br.com.b2vnauthapi.b2vnauthapi.modules.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,9 +14,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
-import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.ALTERANDO;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
+import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.REMOVENDO;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -36,8 +35,6 @@ public class LogService {
     private UsuarioService usuarioService;
     @Autowired
     private LogRepository logRepository;
-    @Autowired
-    private LogRepositoryJdbcImpl logRepositoryJdbc;
 
     public void gerarLogUsuario(HttpServletRequest request) throws IOException {
         if (isAuthenticated(request) && !URLS_PROIBIDAS.contains(request.getRequestURI())) {
@@ -79,10 +76,7 @@ public class LogService {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:MM:ss");
         System.out.println("Salvando o log do usuário " + log.getUsuarioNome() + " ("
             + log.getUsuarioEmail() + ") às " + df.format(log.getDataAcesso()));
-        var savedLog = logRepository.save(log);
-        if (!isEmpty(savedLog)) {
-            logRepositoryJdbc.atualizaCamposDeDataEHora();
-        }
+        logRepository.save(log);
     }
 
     public Page<Log> buscarTodosPaginados(String metodo, Integer page, Integer size) {
