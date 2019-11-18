@@ -71,7 +71,7 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
 
 ## Arquitetura
 
-A arquitetura utilizada é a [REST](http://www.matera.com/blog/post/quais-os-beneficios-da-arquitetura-rest), que é um protocolo utilizado na integração de Web Services, e estes, são soluções utilizadas para integração e comunicação entre sistemas. Como uma abstração da arquitetura HTTP
+A arquitetura utilizada é a [REST](http://www.matera.com/blog/post/quais-os-beneficios-da-arquitetura-rest), um protocolo utilizado na integração de Web Services, e estes, são soluções utilizadas para integração e comunicação entre sistemas. Como uma abstração da arquitetura HTTP
 
 ![RESTful example](http://www.matera.com/br/wp-content/uploads/2018/06/RESTful-Service-Client-Example-Crunchify-Tutorial.png)
 
@@ -99,7 +99,16 @@ http://localhost:8080/swagger-ui.html
 http://localhost:8081/swagger-ui.html
 
 
-## Linguagens & ferramentas
+## Teste de Estresse
+
+O [JMeter](https://jmeter.apache.org/download_jmeter.cgi) é uma ferramenta desenvolvida totalmente em Java pelo grupo Apache com o objetivo de realizar testes de carga e stress, a seguir faço um roteiro para realização de um teste de stress simples.
+
+A versão do JMeter utilizada é a 5.2.
+
+![Stress Test - B2VN](https://i.ibb.co/hWwYtWx/stress-test.jpg)
+
+
+## Linguagens & Ferramentas
 
 ### JAVA
 
@@ -117,5 +126,6 @@ http://localhost:8081/swagger-ui.html
 - [React Map GL](https://uber.github.io/react-map-gl/) é utilizado para visualização do mapa.
 - [React](http://facebook.github.io/react) é usado para a interface do usuário.
 - [axios](https://github.com/axios/axios) é utilizado para o client HTTP.
-- [sweetalert2](https://sweetalert2.github.io/) é utilizado para os alertas e mensagens ao usuário
-- [react-table](https://www.npmjs.com/package/react-table) para a visualizações dos dados nas tabelas
+- [sweetalert2](https://sweetalert2.github.io/) é utilizado para os alertas e mensagens ao usuário.
+- [react-table](https://www.npmjs.com/package/react-table) para a visualizações dos dados nas tabelas.
+- [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2) utilizado para gerar gráficos dinâmicos.
