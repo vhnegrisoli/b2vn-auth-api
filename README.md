@@ -13,7 +13,7 @@ Você poderá executar o seguinte comando após o procedimento de instalação a
     $ java -version
     java version "11.0.5"
 
-## Instalação - Local
+## Instalação (Local)
 
     $ git clone https://github.com/vhnegrisoli/b2vn-auth-api.git
     $ cd b2vn-auth-api
@@ -34,7 +34,7 @@ ou
     $ java -jar b2vn-auth-api.jar
     
 
-## Instalação - Docker
+## Instalação (Docker)
 
 Para começar, como são microsserviços, é necessário ter todos os projetos.
 
@@ -63,7 +63,7 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
  - Sistema [RBAC](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview) (Usuários, administradores, configurações de acesso, permissões)
  - Rate Limiting configurável e baseado no RBAC
  - API baseada em microsserviços: Autenticação, Radares, Trajetos e Controles
- - Saídas em JSON, XML
+ - Saídas em JSON e XML
  - Exportação para CSV
  - Visualização dos radares por lote no Mapa
  - Visualização das consultas em formato de tabelas paginadas
@@ -90,7 +90,7 @@ O [Diagrama de Implantação](https://www.lucidchart.com/pages/pt/o-que-e-diagra
 
 ![Implantação - B2VN](https://i.ibb.co/JByjgDR/Diagrama-de-Implanta-o.png)
 
-## Documentação - Swagger
+## Documentação (Swagger)
 
 ### Documentação da autenticação
 http://localhost:8080/swagger-ui.html
@@ -103,7 +103,7 @@ http://localhost:8081/swagger-ui.html
 
 O [JMeter](https://jmeter.apache.org/download_jmeter.cgi) é uma ferramenta desenvolvida totalmente em Java pelo grupo Apache com o objetivo de realizar testes de carga e stress, a seguir faço um roteiro para realização de um teste de stress simples.
 
-A versão do JMeter utilizada é a 5.2.
+A versão do JMeter utilizada é a 5.2
 
 ![Stress Test - B2VN](https://i.ibb.co/hWwYtWx/stress-test.jpg)
 
@@ -129,3 +129,9 @@ A versão do JMeter utilizada é a 5.2.
 - [sweetalert2](https://sweetalert2.github.io/) é utilizado para os alertas e mensagens ao usuário.
 - [react-table](https://www.npmjs.com/package/react-table) para a visualizações dos dados nas tabelas.
 - [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2) utilizado para gerar gráficos dinâmicos.
+
+
+### Licensa de uso
+
+Este projeto está licenciado sob a licença MIT(Instituto de Tecnologia de Massachusetts).
+Para mais informações consulte o arquivo ![LICENSE](LICENSE)
