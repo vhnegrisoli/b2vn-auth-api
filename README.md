@@ -202,4 +202,4 @@ O [JMeter](https://jmeter.apache.org/download_jmeter.cgi) é uma ferramenta dese
 ### Licensa de uso
 
 Este projeto está licenciado sob a licença MIT(Instituto de Tecnologia de Massachusetts).
-Para mais informações consulte nossa ![LICENSE](licença)
+Para mais informações consulte nossa ![LICENSE](LICENSE)
