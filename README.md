@@ -1,9 +1,18 @@
 # b2vn-auth-api
 Back-end de autenticação do projeto B2VN utilizando Java 11, Spring Boot, Spring Security, OAuth2.0, Spring Cloud OpenFeign, QueryDSL e PostgreSQL 11.
 
+## Apresentação
+
+### Telas (Site)
+
+#### Tela de Login
+
+![Tela de Login](/imagens/login.jpeg)
+
 ## Exigências
 
 Para o desenvolvimento, você precisará apenas do JAVA instalado em seu ambiente de trabalho.
+
 
 ### Java
 
@@ -134,4 +143,4 @@ A versão do JMeter utilizada é a 5.2
 ### Licensa de uso
 
 Este projeto está licenciado sob a licença MIT(Instituto de Tecnologia de Massachusetts).
-Para mais informações consulte o arquivo ![LICENSE](LICENSE)
+Mais informações consulte a ![LICENSE](LICENSE)
