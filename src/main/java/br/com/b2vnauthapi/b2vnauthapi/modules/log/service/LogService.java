@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.CONSULTANDO;
 import static br.com.b2vnauthapi.b2vnauthapi.modules.log.enums.ETipoOperacao.SALVANDO;
@@ -29,6 +30,7 @@ public class LogService {
 
     private static final String SERVICO_NOME = "B2VN_AUTH_API";
     private static final String SERVICO_DESCRICAO = "Api de Autenticação";
+    private static final List<String> URLS_PROIBIDAS = List.of("usuarios", "log");
 
     @Autowired
     private UsuarioService usuarioService;
@@ -38,7 +40,7 @@ public class LogService {
     private LogRepositoryJdbcImpl logRepositoryJdbc;
 
     public void gerarLogUsuario(HttpServletRequest request) throws IOException {
-        if (isAuthenticated(request)) {
+        if (isAuthenticated(request) && !URLS_PROIBIDAS.contains(request.getRequestURI())) {
             var usuarioLogado = usuarioService.getUsuarioAutenticado();
             processarLogDeUsuario(Log
                 .builder()
