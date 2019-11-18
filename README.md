@@ -79,8 +79,13 @@ O [Diagrama de Implantação](https://www.lucidchart.com/pages/pt/o-que-e-diagra
 
 ![Implantação - B2VN](https://i.ibb.co/JByjgDR/Diagrama-de-Implanta-o.png)
 
-### Documentação da API com o Swagger
+## Documentação - Swagger
+
+### Documentação da autenticação
 http://localhost:8080/swagger-ui.html
+
+### Documentação da autenticação
+http://localhost:8081/swagger-ui.html
 
 
 ## Linguagens & ferramentas
