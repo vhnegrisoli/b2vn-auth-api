@@ -62,7 +62,7 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
  - Token de segurança (Oauth2)
  - Log para controle de acesso dos usuários
  - Sistema [RBAC](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview) (Usuários, administradores, configurações de acesso, permissões)
- - Rate Limiting baseado no RBAC
+ - Rate Limiting configuravel e baseado no RBAC
  - API baseada em microsserviços: Autenticação, Radares, Trajetos e Controles
  - Saídas em JSON, XML
  - Exportação para CSV
@@ -110,3 +110,11 @@ http://localhost:8081/swagger-ui.html
 - [PostgreSQL](https://www.postgresql.org/) como banco de dados.
 - [OpenFeign](https://github.com/OpenFeign/feign) para realizar os feign clients.
 - [Spring Cloud](https://spring.io/projects/spring-cloud) para ferramentas voltadas a microsserviços.
+
+### JavaScript
+
+- [React Map GL](https://uber.github.io/react-map-gl/) é utilizado para visualização do mapa.
+- [React](http://facebook.github.io/react) é usado para a interface do usuário.
+- [axios](https://github.com/axios/axios) é utilizado para o client HTTP.
+- [sweetalert2](https://sweetalert2.github.io/) é utilizado para os alertas e mensagens ao usuário
+- [react-table](https://www.npmjs.com/package/react-table) para a visualizações dos dados nas tabelas
