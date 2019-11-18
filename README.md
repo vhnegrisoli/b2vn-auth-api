@@ -57,6 +57,16 @@ Para começar, como são microsserviços, é necessário ter todos os projetos.
     $ docker container run --network b2vn --name front -p 3000:80 b2vn-front
 
 
+### Funcionalidades
+    - Paginação nas consultas para melhoras a eficiência  
+    - Token de segurança (Oauth2)
+    - Log para controle de acesso dos usuários
+    - Sistema [RBAC](https://docs.microsoft.com/pt-br/azure/role-based-access-control/overview) (Usuários, administradores, configurações de acesso, permissões)
+    - Rate Limiting baseado no RBAC
+    - API baseada em microsserviços: Autenticação, Radares, Trajetos e Controles
+    - Saídas em JSON, XML
+    - Exportação para CSV
+
 
 ## Arquitetura
 
@@ -84,7 +94,7 @@ O [Diagrama de Implantação](https://www.lucidchart.com/pages/pt/o-que-e-diagra
 ### Documentação da autenticação
 http://localhost:8080/swagger-ui.html
 
-### Documentação da autenticação
+### Documentação dos radares
 http://localhost:8081/swagger-ui.html
 
 
@@ -97,3 +107,6 @@ http://localhost:8081/swagger-ui.html
 - [Oauth2](https://oauth.net/2/) é o protocolo para autorização. 
 - [QueryDSL](http://www.querydsl.com/) é utilizado para simplificação de consultas ao banco de dados.
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa) implementa facilmente o JPA.
+- [PostgreSQL](https://www.postgresql.org/) como banco de dados.
+- [OpenFeign](https://github.com/OpenFeign/feign) para realizar os feign clients.
+- [Spring Cloud](https://spring.io/projects/spring-cloud) para ferramentas voltadas a microsserviços.
