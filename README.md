@@ -26,9 +26,13 @@ Na API é possível executar serviços de comparações, com visualização grá
 
 #### Tela do mapa de radares separados por cores
 
-Ao clicar sobre um radar, aparecerá um popup indicando os parâmetros do mesmo.
+É possível navegar no mapa e escolher um radar para ver mais informações.
 
 ![mapa](/imagens/mapa.jpeg)
+
+Ao clicar sobre um radar, aparecerá um popup indicando os parâmetros do mesmo.
+
+![mapa_clicado](/imagens/mapa_clicado.jpeg)
 
 #### Tela consulta das localizações
 
@@ -215,7 +219,7 @@ O [JMeter](https://jmeter.apache.org/download_jmeter.cgi) é uma ferramenta dese
 - [Victor Hugo Negrisoli](https://www.linkedin.com/in/victorhugonegrisoli) - Desenvolvedor Back-end
  
 
-### Licensa de uso
+### Licença de uso
 
 Este projeto está licenciado sob a licença MIT(Instituto de Tecnologia de Massachusetts).
 Para mais informações consulte nossa ![LICENSE](LICENSE)
