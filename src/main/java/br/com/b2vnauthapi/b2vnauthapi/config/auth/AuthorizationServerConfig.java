@@ -40,10 +40,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private String radarApiClient;
     @Value("${app-config.oauth-clients.b2vn-radar-api.secret}")
     private String radarApiSecret;
-    @Value("${app-config.oauth-clients.b2vn-acidentes-api.client}")
-    private String acidentesApiClient;
-    @Value("${app-config.oauth-clients.b2vn-acidentes-api.secret}")
-    private String acidentesApiSecret;
 
     @Bean
     public TokenStore tokenStore() {
@@ -76,13 +72,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .secret(bcryptPasswordEncoder.encode(radarApiSecret))
             .authorizedGrantTypes("client_credentials")
             .scopes("b2vn-radar-api")
-            .authorities(ADMIN.name(), USER.name())
-
-            .and()
-            .withClient(acidentesApiClient)
-            .secret(bcryptPasswordEncoder.encode(acidentesApiSecret))
-            .authorizedGrantTypes("client_credentials")
-            .scopes("b2vn-acidentes-api")
             .authorities(ADMIN.name(), USER.name())
 
             .resourceIds("oauth2-resource")
