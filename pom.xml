@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<maven.checkstyle.version>3.0.0</maven.checkstyle.version>
-		<puppycrawl.checkstyle.version>8.18</puppycrawl.checkstyle.version>
+		<puppycrawl.checkstyle.version>8.29</puppycrawl.checkstyle.version>
 		<apache.maven.pmd.version>3.11.0</apache.maven.pmd.version>
 	</properties>
 
