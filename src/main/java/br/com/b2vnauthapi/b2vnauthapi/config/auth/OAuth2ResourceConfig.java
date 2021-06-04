@@ -30,6 +30,7 @@ public class OAuth2ResourceConfig extends ResourceServerConfigurerAdapter {
     @SuppressWarnings({"checkstyle:methodlength"})
     public void configure(HttpSecurity http) throws Exception {
         String[] permitAll = {
+            "/",
             "/login/**",
             "/oauth/token",
             "/oauth/authorize",
