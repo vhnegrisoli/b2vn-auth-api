@@ -7,13 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement
 public class UsuarioResponse {
 
     private Integer id;
