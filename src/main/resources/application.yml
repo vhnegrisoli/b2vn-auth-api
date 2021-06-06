@@ -33,6 +33,10 @@ spring:
       max-idle: 40
 
 app-config:
+
+  application:
+    url: http://localhost:8080
+
   oauth-clients:
     b2vn-auth-api:
       client: b2vn-auth-api-client
