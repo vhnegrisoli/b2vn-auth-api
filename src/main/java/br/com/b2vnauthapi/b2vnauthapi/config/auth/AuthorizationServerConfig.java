@@ -41,11 +41,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${app-config.oauth-clients.b2vn-radar-api.secret}")
     private String radarApiSecret;
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
-    }
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
@@ -81,10 +76,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-            .authenticationManager(authenticationManager)
             .tokenStore(tokenStore)
+            .authenticationManager(authenticationManager)
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-            .tokenEnhancer(new CustomTokenEnhancer())
-            .authenticationManager(authenticationManager);
+            .tokenEnhancer(new CustomTokenEnhancer());
     }
 }
